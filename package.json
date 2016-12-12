@@ -1,0 +1,25 @@
+{
+  "name": "form-redirect",
+  "version": "0.0.1",
+  "description": "A template for a nodejs application with typescript toolchain",
+  "main": "build/server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tobias Watzl <twatzl@gmx.at>",
+  "license": "",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "browser-sync": "^2.18.5",
+    "del": "^2.2.2",
+    "express": "^4.14.0",
+    "gulp": "^3.9.1",
+    "gulp-debug": "^3.0.0",
+    "gulp-inject": "^4.1.0",
+    "gulp-tslint": "^7.0.1",
+    "gulp-typescript": "^3.1.3",
+    "superstatic": "^4.0.3",
+    "tslint": "^4.0.2",
+    "typescript": "^2.1.4"
+  }
+}
