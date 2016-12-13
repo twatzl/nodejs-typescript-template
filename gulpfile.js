@@ -10,6 +10,7 @@ var gulp = require('gulp'),
     browserSync = require('browser-sync'),
     superstatic = require('superstatic'),
 	childProcess = require('child_process'),
+	path = require('path'),
     Config = require('./gulpfile.config'),
 	Helper = require('./typescript-build-functions.js');
 
@@ -38,6 +39,17 @@ gulp.task('compile-ts', function (callback) {
 });
 
 /**
+ * Copy the node modules needed for the client to the build directory
+ */
+gulp.task('copy-node-modules', function(callback) {
+	config.clientNodeModules.forEach(function (nodeModule) {
+		helper.copyJavascript(
+			path.join("node_modules/",nodeModule),
+			path.join(config.clientNodeModulesDir, nodeModule));
+	})
+})
+
+/**
  * Remove all generated and copied files from build directory.
  */
 gulp.task('clean', function (callback) {
@@ -48,7 +60,7 @@ gulp.task('watch', function () {
     gulp.watch(config.tsSourceDir, ['build']);
 });
 
-gulp.task('build', ['compile-ts', 'copy-js', 'copy-view'], function() {
+gulp.task('build', ['compile-ts', 'copy-js', 'copy-view', 'copy-node-modules'], function() {
 	// yeah fine should be built here
 })
 
