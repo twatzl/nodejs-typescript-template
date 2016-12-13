@@ -34,7 +34,7 @@ var TypescriptBuildFunctions = (function () {
 			console.log("CopyHTML")
 			console.log("Source: " + sourceFolder);
 			console.log("Destination: " + destinationFolder);
-			return gulp.src([sourceFolder + '**/*.html'])
+			return gulp.src([sourceFolder + '**/*.html', sourceFolder + '**/*.css'])
 				.pipe(gulp.dest(destinationFolder))
 				.on('end', function() {
 					//callback();
