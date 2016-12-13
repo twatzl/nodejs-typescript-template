@@ -8,25 +8,20 @@ import {text, ParsedAsUrlencoded} from 'body-parser';
 const app = express();
 const port = 8080;
 
-app.use(express.static(__dirname + "/../view"));
+app.use('/', express.static(__dirname + "/../client/view/html"));
+app.use('/css', express.static(__dirname + "/../client/view/css"));
+app.use('/app', express.static(__dirname + "/../client/app"));
+app.use('/config', express.static(__dirname + "/../client/config"));
+app.use('/node_modules', express.static(__dirname + "/../client/node_modules"));
 
-app.get('/', function(req: Request, res: Response) {
+// Example for Get handler
+/* app.get('/', function(req: Request, res: Response) {
 	res.sendFile(path.join(__dirname + "/../view/html/index.html"));
-})
+}) */
 
-app.get('/login', function (req: Request & ParsedAsUrlencoded, res: Response) {
-	var loginSuccessful = req.body.successful;
-	
-	if (loginSuccessful) {
-		res.redirect('redirect');
-	} else {
-		res.status(200).end();
-	}
-})
-
-app.get('/api/data', function (req: Request, res: Response) {
-	res.status(200).sendFile(path.join(__dirname, "../html/api.html"));
-});
+// Example for Post handler
+/* app.post('/login', function (req: Request & ParsedAsUrlencoded, res: Response) {
+}) */
 
 // start the server
 app.listen(port);
