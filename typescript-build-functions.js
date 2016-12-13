@@ -7,27 +7,18 @@ var path = require('path'),
     del = require('del');
 
 var TypescriptBuildFunctions = (function () {
-    function typescriptBuildFunctions(config, tsProject) {
+    function typescriptBuildFunctions() {
 
-		this.compileTypescript = function(sourceFolder, destinationFolder, callback) {
+		this.compileTypescript = function(sourceFolder, destinationFolder, callback, tsProject, tsDefinitionFiles = []) {
 			console.log("CompileTypescript")
 			console.log("Source: " + sourceFolder);
 			console.log("Destination: " + destinationFolder);
-			
-			var sourceTsFiles = [sourceFolder + '**/*.ts',              //path to typescript files
-				config.libraryTypeScriptDefinitions]; 				//reference to library .d.ts files
-                        
-			var tsResult = gulp.src(sourceTsFiles)
+ 
+			return	gulp.src([sourceFolder + '**/*.ts'].concat(tsDefinitionFiles))
 				.pipe(sourcemaps.init())
-				.pipe(tsc(tsProject));
-
-			tsResult.dts.pipe(gulp.dest(destinationFolder));
-			return tsResult.js
+				.pipe(tsProject())
 				.pipe(sourcemaps.write('.' ,{includeContent: true, sourceRoot: path.join(__dirname, sourceFolder)}))
-				.pipe(gulp.dest(destinationFolder))
-				.on('end', function() {
-					//callback();
-				});
+				.pipe(gulp.dest(destinationFolder));
 		}
 
 		this.copyViewFiles = function(sourceFolder, destinationFolder, callback) {

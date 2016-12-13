@@ -14,7 +14,7 @@ var gulp = require('gulp'),
 	Helper = require('./typescript-build-functions.js');
 
 var config = new Config();
-var helper = new Helper(config, config.tsProject);
+var helper = new Helper();
 
 /**
  * Copy HTML and CSS files
@@ -34,7 +34,7 @@ gulp.task('copy-js', function(callback) {
  * Compile TypeScript files
  */
 gulp.task('compile-ts', function (callback) {
-	helper.compileTypescript(config.tsSourceDir, config.tsBuildDir, callback);
+    helper.compileTypescript(config.tsSourceDir, config.tsBuildDir, callback, config.tsProject, config.tsDefinitionFiles);
 });
 
 /**

@@ -5,13 +5,7 @@
     "declaration": true,
     "sourceMap": true,
 	"experimentalDecorators": true
-  },
-  "exclude" : [
-	  "node_modules",
-	  "app/node_modules",
-	  "build",
-	  "app/build",
-	  "app/Game/js",
-	  "app/MapEditor/js"
-  ]
+  }
+  // include, exclude, types and typeRoots options are not working with this configuration
+  // please use gulpfile.config.js to configure these options
 }
