@@ -30,8 +30,9 @@ var TypescriptBuildFunctions = (function () {
 				});
 		}
 
-		this.copyPartialViews = function(sourceFolder, destinationFolder, callback) {
-			console.log("CopyHTML")
+		this.copyViewFiles = function(sourceFolder, destinationFolder, callback) {
+			console.log("CopyHTML");
+			console.log("(and CSS)");
 			console.log("Source: " + sourceFolder);
 			console.log("Destination: " + destinationFolder);
 			return gulp.src([sourceFolder + '**/*.html', sourceFolder + '**/*.css'])

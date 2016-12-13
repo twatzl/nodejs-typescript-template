@@ -7,7 +7,6 @@ var gulp = require('gulp'),
     tslint = require('gulp-tslint'),
     sourcemaps = require('gulp-sourcemaps'),
     del = require('del'),
-    tsProject = tsc.createProject('tsconfig.json'),
     browserSync = require('browser-sync'),
     superstatic = require('superstatic'),
 	childProcess = require('child_process'),
@@ -17,26 +16,29 @@ var gulp = require('gulp'),
 var config = new Config();
 var helper = new Helper(config, config.tsProject);
 
+/**
+ * Copy HTML and CSS files
+ */
 gulp.task('copy-view', function (callback) {
-	helper.copyPartialViews(config.viewSrcFiles, config.viewOutputPath, callback);
+	helper.copyViewFiles(config.viewSourceDir, config.viewBuildDir, callback);
 })
 
 /**
  * Compile TypeScript and include references to library and app .d.ts files.
  */
 gulp.task('compile-ts', function (callback) {
-    helper.compileTypescript(config.source, config.tsOutputPath, callback);
+	helper.compileTypescript(config.tsSourceDir, config.tsBuildDir, callback);
 });
 
 /**
- * Remove all generated JavaScript files from TypeScript compilation.
+ * Remove all generated and copied files from build directory.
  */
-gulp.task('clean-ts', function (callback) {
-	helper.cleanFiles(config.tsOutputPath, callback);
+gulp.task('clean', function (callback) {
+	helper.cleanFiles(config.buildDir, callback);
 });
 
 gulp.task('watch', function () {
-    gulp.watch([config.tsSrcFiles], ['build']);
+    gulp.watch(config.tsSourceDir, ['build']);
 });
 
 gulp.task('build', ['compile-ts','copy-view'], function() {
