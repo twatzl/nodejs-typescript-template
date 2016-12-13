@@ -14,7 +14,7 @@ var TypescriptBuildFunctions = (function () {
 			console.log("Source: " + sourceFolder);
 			console.log("Destination: " + destinationFolder);
  
-			return	gulp.src([sourceFolder + '**/*.ts'].concat(tsDefinitionFiles))
+			return	gulp.src([path.join(sourceFolder,'**/*.ts')].concat(tsDefinitionFiles))
 				.pipe(sourcemaps.init())
 				.pipe(tsProject())
 				.pipe(sourcemaps.write('.' ,{includeContent: true, sourceRoot: path.join(__dirname, sourceFolder)}))
@@ -26,7 +26,9 @@ var TypescriptBuildFunctions = (function () {
 			console.log("(and CSS)");
 			console.log("Source: " + sourceFolder);
 			console.log("Destination: " + destinationFolder);
-			return gulp.src([sourceFolder + '**/*.html', sourceFolder + '**/*.css'])
+			return gulp.src(
+				[path.join(sourceFolder,'**/*.html'),
+				path.join(sourceFolder,'**/*.css')])
 				.pipe(gulp.dest(destinationFolder))
 				.on('end', function() {
 					//callback();
@@ -37,7 +39,8 @@ var TypescriptBuildFunctions = (function () {
 			console.log("CopyJavascript")
 			console.log("Source: " + sourceFolder);
 			console.log("Destination: " + destinationFolder);
-			return gulp.src([sourceFolder + '**/*.js'])
+			return gulp.src(
+				[path.join(sourceFolder,'**/*.js')])
 				.pipe(gulp.dest(destinationFolder))
 				.on('end', function() {
 					//callback();
