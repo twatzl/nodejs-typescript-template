@@ -24,7 +24,14 @@ gulp.task('copy-view', function (callback) {
 })
 
 /**
- * Compile TypeScript and include references to library and app .d.ts files.
+ * Copy JavaScript files
+ */
+gulp.task('copy-js', function(callback) {
+	helper.copyJavascript(config.jsSourceDir, config.jsBuildDir, callback);
+})
+
+/**
+ * Compile TypeScript files
  */
 gulp.task('compile-ts', function (callback) {
 	helper.compileTypescript(config.tsSourceDir, config.tsBuildDir, callback);
@@ -41,7 +48,7 @@ gulp.task('watch', function () {
     gulp.watch(config.tsSourceDir, ['build']);
 });
 
-gulp.task('build', ['compile-ts','copy-view'], function() {
+gulp.task('build', ['compile-ts', 'copy-js', 'copy-view'], function() {
 	// yeah fine should be built here
 })
 
